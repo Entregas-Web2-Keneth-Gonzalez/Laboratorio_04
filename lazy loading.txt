@@ -1,0 +1,20 @@
+en la carpeta "paginas" se crea el modulo X y se le añade su routing
+ng g m "modulo" --routing
+en la carpeta creada, se crea el componente X
+ng g c "componente"
+
+en la constante del routing se añade el path con dirección vacia, y la sentencia que apunte al componente
+en este caso:
+const routes: Routes = [
+  {
+    path: '',
+    component: PersonajesComponent,
+  }
+];
+ahora, en el enrutador principal, en el de app.routes.ts se añade el path:
+{
+        path:'',
+        loadChildren: () => import ('./paginas/personajes/personajes.module').then((m) => m.PersonajesModule),
+    },
+
+en dado caso que se quisiera dar una dirección especifica (por ejemplo, localhost:4200/personajes), se añade 'personajes' en el campo del path de app.routes.ts, pero en este caso la practica indica que este componente se tiene que cargar segun inicie la pagina, por lo tanto se deja vacio haciendo referencia unicamente a localhost:4200/

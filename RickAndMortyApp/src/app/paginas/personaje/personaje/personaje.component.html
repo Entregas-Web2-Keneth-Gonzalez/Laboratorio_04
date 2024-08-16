@@ -1,0 +1,33 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>ID</mat-label>
+    <input matInput #message maxlength="256" placeholder="1 to 20">
+    <mat-hint align="start">
+      <strong>Ingrese el ID del personaje específico</strong>
+    </mat-hint>
+    <mat-hint align="end">{{message.value.length}} / 2</mat-hint>
+  </mat-form-field>
+  <section>
+    <div class="example-button-row">
+      <button mat-flat-button (click)="buscarPersonaje()">Buscar</button>
+    </div>
+  </section>
+</form>
+
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image">
+      <img *ngIf="character?.image" [src]="character.image" alt="{{character?.name}}">
+    </div>
+    <mat-card-title>{{ character?.name || 'Character Name' }}</mat-card-title>
+    <mat-card-subtitle>{{ character?.species || 'Species' }}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image *ngIf="character?.image" [src]="character.image" alt="{{character?.name}}">
+  <mat-card-content>
+    <p>Status: {{ character?.status || 'Status' }}</p>
+    <p>Gender: {{ character?.gender || 'Gender' }}</p>
+    <p>Origin: {{ character?.origin?.name || 'Origin' }}</p>
+    <p>Location: {{ character?.location?.name || 'Location' }}</p>
+    <p>Created: {{ character?.created || 'Created Date' }}</p>
+  </mat-card-content>
+</mat-card>
