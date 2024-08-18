@@ -1,30 +1,39 @@
-<form class="example-form">
+<form class="example-form" class="buscar">
   <mat-form-field class="example-full-width">
     <mat-label>ID</mat-label>
-    <input matInput #message maxlength="256" placeholder="1 to 20">
+    <input matInput #message maxlength="256" placeholder="">
     <mat-hint align="start">
       <strong>Ingrese el ID del personaje específico</strong>
     </mat-hint>
-    <mat-hint align="end">{{message.value.length}} / 2</mat-hint>
+    <mat-hint align="end">{{ message.value.length }} / 2</mat-hint>
   </mat-form-field>
   <section>
     <div class="example-button-row">
-      <button mat-flat-button (click)="buscarPersonaje()">Buscar</button>
+      <button mat-flat-button (click)="buscarPersonaje($event)">Buscar</button>
     </div>
   </section>
 </form>
 
-<mat-card class="example-card" appearance="outlined">
+<mat-card class="example-card" appearance="outlined" class="buscar">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image">
-      <img *ngIf="character?.image" [src]="character.image" alt="{{character?.name}}">
-    </div>
     <mat-card-title>{{ character?.name || 'Character Name' }}</mat-card-title>
     <mat-card-subtitle>{{ character?.species || 'Species' }}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image *ngIf="character?.image" [src]="character.image" alt="{{character?.name}}">
+  <img mat-card-image *ngIf="character?.image" [src]="character?.image" alt="{{character?.name}}">
   <mat-card-content>
-    <p>Status: {{ character?.status || 'Status' }}</p>
+    <span 
+      [ngStyle]="{
+        'background-color': character?.status === 'Alive' ? 'green' :
+                            character?.status === 'Dead' ? 'red' :
+                            character?.status === 'unknown' ? 'gray' :
+                            'black'
+      }" 
+      class="status-circle">
+    </span>
+    <p style="display: inline-block; vertical-align: middle; margin: 0;">
+      Status: {{ character?.status || 'Status' }}
+    </p>
+    <p>Specie: {{character?.species}}</p>
     <p>Gender: {{ character?.gender || 'Gender' }}</p>
     <p>Origin: {{ character?.origin?.name || 'Origin' }}</p>
     <p>Location: {{ character?.location?.name || 'Location' }}</p>
